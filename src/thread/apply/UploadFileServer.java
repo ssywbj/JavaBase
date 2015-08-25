@@ -25,9 +25,8 @@ public class UploadFileServer {
 	private Map<Long, FileLog> datas = new HashMap<Long, FileLog>();// 存放断点数据
 
 	public UploadFileServer() {
-		// 创建线程池，池中共有(CPU个数*50)条线程
 		executorService = Executors.newFixedThreadPool(Runtime.getRuntime()
-				.availableProcessors() * 50);
+				.availableProcessors() * 50);// 创建线程池，池中共有(CPU个数*50)条线程
 	}
 
 	/**
