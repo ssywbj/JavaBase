@@ -6,6 +6,8 @@ import java.io.PushbackInputStream;
 import java.io.RandomAccessFile;
 import java.net.Socket;
 
+import utils.StreamTool;
+
 public class UploadFileClient {
 
 	public static void main(String[] args) {

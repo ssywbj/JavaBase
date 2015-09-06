@@ -16,6 +16,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import utils.StreamTool;
+
 public class UploadFileServer {
 	public static final int PORT = 7880;// 监听端口
 	public static final int BUFFER_TIME = 4;
@@ -86,8 +88,8 @@ public class UploadFileServer {
 					File file = null;// 生成本地文件文件，保存客户端上传的文件
 					int position = 0;
 					if (log == null) {// 如果是初次上传
-						String path = new SimpleDateFormat("yyyy-MM-dd'T'HH_mm_ss")
-								.format(new Date());
+						String path = new SimpleDateFormat(
+								"yyyy-MM-dd'T'HH_mm_ss").format(new Date());
 						File dir = new File("file/" + path);
 						if (!dir.exists()) {
 							dir.mkdirs();// 依次建立多个目录
