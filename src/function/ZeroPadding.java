@@ -11,9 +11,8 @@ public class ZeroPadding {
 	protected String insertZero(String str) {
 		StringBuffer sbf = new StringBuffer();
 		char[] ch = str.toCharArray();
-		int len = ch.length;
 
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < ch.length; i++) {
 			sbf.append(ch[i]);
 
 			if (ch[i] == '1') {
@@ -21,7 +20,7 @@ public class ZeroPadding {
 			}
 
 			if (ch[i] == '0') {
-				count = 0;// 每遇到“0”就清零，即重新计数
+				count = 0;// 一遇到“0”就清零，即重新计数
 			}
 
 			if (count == 5) {// 共计有五个连续的“1”后，就在后面多添加一个“0”
@@ -35,9 +34,8 @@ public class ZeroPadding {
 	protected String deleteZero(String str) {
 		char[] ch = str.toCharArray();
 		StringBuilder sbf = new StringBuilder();
-		int len = ch.length;
 
-		for (int x = 0; x < len; x++) {
+		for (int x = 0; x < ch.length; x++) {
 			sbf.append(ch[x]);
 
 			if (ch[x] == '1') {
