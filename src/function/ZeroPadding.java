@@ -78,5 +78,29 @@ public class ZeroPadding {
 
 		// System.out.println("还原数据");
 		zp.print(zp.deleteZero(str2));
+
+		System.out.println();
+		byte[] copy = "ABCDE".getBytes();
+		byte[] source = new byte[2 + copy.length];
+		source[0] = 0x46;
+		source[1] = 0x13;
+		print(source);
+
+		/*
+		 * copy：被复制的数组；0：被复制的数组从第1个开始复制；source：被复制到source数组；2：从source数组的第3个开始写入；copy
+		 * .length：复制(copy.length)个元素到source数组。
+		 */
+		System.arraycopy(copy, 0, source, 2, copy.length);
+		print(source);
+
+		String data = new String(source, 0, 1);
+		System.out.println("data = " + data);
+	}
+
+	private static void print(byte[] data) {
+		for (int i : data) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
 	}
 }
