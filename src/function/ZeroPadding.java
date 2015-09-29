@@ -80,12 +80,13 @@ public class ZeroPadding {
 		zp.print(zp.deleteZero(str2));
 
 		System.out.println();
-		byte[] copy = "ABCDE".getBytes();
-		byte[] source = new byte[2 + copy.length];
-		source[0] = 0x46;
-		source[1] = 0x13;
-		print(source);
 
+		byte[] copy = "A我BCE是".getBytes();
+		// 注意：copy.length 与 "A我BCE是".length()不相等，因为中文不止是用一个字节表示。
+		byte[] source = new byte[2 + copy.length];
+		source[0] = 0x46;// 十进制70
+		source[1] = 0x47;// 十进制19
+		print(source);
 		/*
 		 * copy：被复制的数组；0：被复制的数组从第1个开始复制；source：被复制到source数组；2：从source数组的第3个开始写入；copy
 		 * .length：复制(copy.length)个元素到source数组。
@@ -93,12 +94,24 @@ public class ZeroPadding {
 		System.arraycopy(copy, 0, source, 2, copy.length);
 		print(source);
 
-		String data = new String(source, 0, 1);
-		System.out.println("data = " + data);
+		String data = new String(source);
+		System.out.println("data.length() = " + data.length() + ", data = "
+				+ data.trim());
+		int initOffset = 1;
+		// initOffset：从第(initOffset+1)个字节开始(包括这字节)；3：截取的长度，即截取多少个字节
+		String data1 = new String(source, initOffset, 5);
+		System.out.println("data1.length() = " + data1.length() + ", data1 = "
+				+ data1.trim());
+
+		byte[] data1Bytes = data1.getBytes();
+		String data2 = new String(source, initOffset + data1Bytes.length,
+				source.length - initOffset - data1Bytes.length);// 截取剩下的字节
+		System.out.println("data2.length() = " + data2.length() + ", data2 = "
+				+ data2.trim());
 	}
 
 	private static void print(byte[] data) {
-		for (int i : data) {
+		for (int i : data) {// 字节数组打印的是ASCII码
 			System.out.print(i + " ");
 		}
 		System.out.println();
