@@ -1,5 +1,8 @@
 package object.demo;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 /**
  * 在Java中，Object类是所有类的公共父类，所有的类的对象和任意的引用数据类型，都可能使用Object对象接收。
  */
@@ -18,6 +21,12 @@ class UnoverrideEquals {
 
 	public int getAge() {
 		return age;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [name=" + name + ", age=" + age
+				+ "]";
 	}
 
 	// 未覆写equals(Object)方法
@@ -122,6 +131,40 @@ public class EqualsDemo {
 		}
 		if (hashCode.hashCode() != hashCode3.hashCode()) {// 因为两个对象HashCode不一致，所以它们不是同一个对象
 			System.out.println(hashCode.equals(hashCode3));// false
+		}
+
+		System.out.println("=========进一步验证两个对象是同一个对象1=========");
+		HashSet<UnoverrideEquals> hashCodeSet = new HashSet<UnoverrideEquals>();// HashSet特性之一：不会加入重复的元素
+		OverrideEquals overrideEquals[] = {
+				new OverrideEquals("Sushiying", 12),
+				new OverrideEquals("Weijiarui", 2),
+				new OverrideEquals("Sushiying", 12),
+				new OverrideEquals("Sushiying", 12),
+				new OverrideEquals("Weibangjie", 23),
+				new OverrideEquals("Weibangjie", 23) };// 六个对象元素
+		for (OverrideEquals instance : overrideEquals) {
+			hashCodeSet.add(instance);// 对于重复的元素，只会添加一次
+		}
+		Iterator<UnoverrideEquals> iterator = hashCodeSet.iterator();
+		while (iterator.hasNext()) {
+			System.out.println((OverrideEquals) iterator.next());// 六个对象元素分别加入集合
+		}
+
+		hashCodeSet.clear();
+		System.out.println("=========进一步验证两个对象是同一个对象2=========");
+
+		OverrideHashCode hashCodes[] = { new OverrideHashCode("Sushiying", 12),
+				new OverrideHashCode("Weijiarui", 2),
+				new OverrideHashCode("Sushiying", 12),
+				new OverrideHashCode("Sushiying", 12),
+				new OverrideHashCode("Weibangjie", 23),
+				new OverrideHashCode("Weibangjie", 23) };// 六个对象元素
+		for (OverrideHashCode instance : hashCodes) {
+			hashCodeSet.add(instance);// 对于重复的元素，只会添加一次
+		}
+		iterator = hashCodeSet.iterator();
+		while (iterator.hasNext()) {
+			System.out.println((OverrideHashCode) iterator.next());// 故虽然有六个对象，但有三个重复，故集合里实际上只有三个元素
 		}
 	}
 
