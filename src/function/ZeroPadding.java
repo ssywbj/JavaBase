@@ -98,7 +98,7 @@ public class ZeroPadding {
 		System.out.println("data.length() = " + data.length() + ", data = "
 				+ data.trim());
 		int initOffset = 1;
-		// initOffset：从第(initOffset+1)个字节开始(包括这字节)；3：截取的长度，即截取多少个字节
+		// offset：从第(offset+1)个字节开始(包括这字节)；length：截取的长度，即截取多少个字节
 		String data1 = new String(source, initOffset, 5);
 		System.out.println("data1.length() = " + data1.length() + ", data1 = "
 				+ data1.trim());
