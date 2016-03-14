@@ -26,6 +26,11 @@ public class Proxy implements Network {
 		if (network != null) {
 			network.browse();
 		}
+		
+		network = new Proxy(new TelReal());// 在代理主题的构造方法中传入真实主题，这样就能够让代理主题操作真实主题了。
+		if (network != null) {
+			network.browse();
+		}
 	}
 
 }
