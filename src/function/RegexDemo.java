@@ -1,9 +1,9 @@
 package function;
 
 public class RegexDemo {
-	private static final String REFEX_DECIMAL = "\\d+.{0,1}\\d{0,2}";// 最多有两位小数
+	private static final String REFEX_DECIMAL = "\\d+\\.{0,1}\\d{0,2}";// 最多有两位小数
 	private static final String REFEX_DATE = "\\d{4}-\\d{2}-\\d{2}";
-	private static final String REFEX_EMAIL = "\\w{5,}@[a-z0-9]{2,4}.[a-z]{2,3}";
+	private static final String REFEX_EMAIL = "\\w{5,}@[a-z0-9]{2,4}\\.[a-z]{2,3}";
 
 	public static void main(String args[]) {
 		validateDecimal("");
