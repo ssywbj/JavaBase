@@ -7,24 +7,28 @@ public class VoiceToText {
 	private static final String[] SOURCE = { "零", "一", "二", "三", "四", "五", "六",
 			"七", "八", "九" };
 	private static final String[] BASIC = { "千", "百", "十", "" };
-	private static final String[] UNIT = { "亿", "万", "" };
+	private static final String[] UNIT = { "亿", "万", "元" };
 
 	public static void main(String args[]) {
-		voiceToText("151000596");
-		voiceToText("180900096");
-		voiceToText("102090701");
-		
-		voiceToText("51000596");
-		voiceToText("18000096");
-		voiceToText("10290701");
-		
-//		voiceToText("5100596");
-//		voiceToText("8000096");
-//		voiceToText("1290701");
-		
-//		voiceToText("510596");
-//		voiceToText("879096");
-//		voiceToText("290701");
+		// voiceToText("151000596");
+		// voiceToText("080900096");
+		// voiceToText("102090.70");
+		// voiceToText("102090.8");
+		// voiceToText("102090.");
+		voiceToText("3,547,803,192");
+		voiceToText("3,547,803.197");
+
+		// voiceToText("51000596");
+		// voiceToText("18000096");
+		// voiceToText("10290701");
+
+		// voiceToText("5100596");
+		// voiceToText("8000096");
+		// voiceToText("1290701");
+
+		// voiceToText("510596");
+		// voiceToText("879096");
+		// voiceToText("290701");
 		// voiceToText("10596");
 		// voiceToText("79096");
 		// voiceToText("73001");
@@ -40,6 +44,24 @@ public class VoiceToText {
 	}
 
 	private static void voiceToText(String voice) {
+		if (voice != null && voice.length() > 0) {
+			if (voice.matches("[1-9]\\d*")) {
+				System.out.println("整数匹配(不能以零开头)");
+			} else if (voice.matches("[1-9]\\d*\\.\\d{1,2}")) {
+				System.out.println("最多带两位小数的匹配");
+			} else if (voice.matches("[1-9]\\d{0,2}(,\\d{3})+(|\\.\\d{1,2})")) {
+				if (voice.contains(".")) {
+					System.out.println("逗号小数匹配");
+				} else {
+					System.out.println("逗号整数匹配");
+				}
+			} else {
+				System.out.println("不匹配");
+			}
+
+			return;
+		}
+
 		String[] child = divideByLen(voice, 4, false);
 		if (child != null) {
 			StringBuilder total = new StringBuilder();
@@ -68,6 +90,7 @@ public class VoiceToText {
 						meetZero = false;
 					}
 				}
+
 				total.append(stringBuilder.toString()).append(
 						UNIT[UNIT.length - child.length + j]);
 			}
@@ -82,6 +105,7 @@ public class VoiceToText {
 			int strLen = source.length();
 			int arrLen = (strLen % len == 0 ? strLen / len : strLen / len + 1);
 			String[] child = new String[arrLen];
+
 			if (fromHead) {
 				for (int i = 0; i < arrLen; i++) {
 					child[i] = source.substring(len * i,
