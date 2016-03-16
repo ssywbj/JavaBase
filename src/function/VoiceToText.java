@@ -10,13 +10,13 @@ public class VoiceToText {
 	private static final String[] UNIT = { "亿", "万", "元" };
 
 	public static void main(String args[]) {
-		// voiceToText("151000596");
-		// voiceToText("080900096");
-		// voiceToText("102090.70");
-		// voiceToText("102090.8");
-		// voiceToText("102090.");
+		voiceToText("151000596");
+		voiceToText("080900096");
+		voiceToText("102090.70");
+		voiceToText("102090.8");
+		voiceToText("102090.");
 		voiceToText("3,547,803,192");
-		voiceToText("3,547,803.197");
+		voiceToText("3,547,803.19");
 
 		// voiceToText("51000596");
 		// voiceToText("18000096");
