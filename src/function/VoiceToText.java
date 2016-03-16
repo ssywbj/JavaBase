@@ -7,8 +7,27 @@ public class VoiceToText {
 	private static final String[] SOURCE = { "零", "一", "二", "三", "四", "五", "六",
 			"七", "八", "九" };
 	private static final String[] BASIC = { "千", "百", "十", "" };
+	private static final String[] UNIT = { "亿", "万", "" };
 
 	public static void main(String args[]) {
+		voiceToText("151000596");
+		voiceToText("180900096");
+		voiceToText("102090701");
+		
+		voiceToText("51000596");
+		voiceToText("18000096");
+		voiceToText("10290701");
+		
+//		voiceToText("5100596");
+//		voiceToText("8000096");
+//		voiceToText("1290701");
+		
+//		voiceToText("510596");
+//		voiceToText("879096");
+//		voiceToText("290701");
+		// voiceToText("10596");
+		// voiceToText("79096");
+		// voiceToText("73001");
 		// voiceToText("3596");
 		// voiceToText("3096");
 		// voiceToText("3006");
@@ -18,35 +37,42 @@ public class VoiceToText {
 		// voiceToText("26");
 		// voiceToText("20");
 		// voiceToText("8");
-
-		divideByLen("3596", 5, true);
-		divideByLen("13596", 5, true);
-		divideByLen("1234596", 4, false);
-		divideByLen("123435968", 4, false);
-		divideByLen("123453596", 4, true);
 	}
 
 	private static void voiceToText(String voice) {
-		if (voice != null && voice.length() > 0) {
-			StringBuilder stringBuilder = new StringBuilder();
-			int basicLen = BASIC.length, len = voice.length(), count = 0;
-			boolean meetZero = false;
+		String[] child = divideByLen(voice, 4, false);
+		if (child != null) {
+			StringBuilder total = new StringBuilder();
+			int basicLen = BASIC.length;
+			StringBuilder stringBuilder = null;
+			boolean meetZero;
+			int len = 0, count = 0;
 			char ch;
-			for (int i = len; i > 0; i--, count++) {
-				ch = voice.charAt(count);
-				if (ch == '0') {
-					meetZero = true;
-				} else {
-					if (meetZero) {
-						stringBuilder.append(SOURCE[0]);
+
+			for (int j = 0; j < child.length; j++) {
+				stringBuilder = new StringBuilder();
+				len = child[j].length();
+				meetZero = false;
+				count = 0;
+
+				for (int i = len; i > 0; i--, count++) {
+					ch = child[j].charAt(count);
+					if (ch == '0') {
+						meetZero = true;
+					} else {
+						if (meetZero) {
+							stringBuilder.append(SOURCE[0]);
+						}
+						stringBuilder.append(SOURCE[Integer.parseInt("" + ch)])
+								.append(BASIC[basicLen - i]);
+						meetZero = false;
 					}
-					stringBuilder.append(SOURCE[Integer.parseInt("" + ch)])
-							.append(BASIC[basicLen - i]);
-					meetZero = false;
 				}
+				total.append(stringBuilder.toString()).append(
+						UNIT[UNIT.length - child.length + j]);
 			}
 
-			System.out.println(stringBuilder.toString());
+			System.out.println(total.toString());
 		}
 
 	}
@@ -70,14 +96,10 @@ public class VoiceToText {
 				}
 			}
 
-			for (String ch : child) {
-				System.out.print(ch + "\t");
-			}
-			System.out.println();
-
 			return child;
 		}
 
 		return null;
 	}
+
 }
