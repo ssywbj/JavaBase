@@ -29,10 +29,64 @@ public class BitDemo {
 		System.out.println("o = " + o);
 
 		byte[] data = new byte[16];
-		Arrays.fill(data, (byte) 0);
+		Arrays.fill(data, (byte) 0);// 数组全部填充0
 		for (int k = 0; k < data.length; k++) {
 			System.out.print(data[k] + " ");
 		}
+
+		System.out.println();
+
+		int[] arr = { 4, 3, 6, 5, 2 };
+		// Arrays.sort(arr);// 直接调用API排序
+		bubbleSort(arr, true);
+		for (int x : arr) {
+			System.out.print(x + " ");
+		}
+		System.out.println();
+
+		bubbleSort(arr, false);
+		for (int x : arr) {
+			System.out.print(x + " ");
+		}
+		System.out.println();
+	}
+
+	/**
+	 * 冒泡排序
+	 * 
+	 * @param arr
+	 *            要排序的数组
+	 * @param headBig
+	 *            true表示排序后返回的数组第一个元素为最大值，false表示最后一个元素为最大值
+	 */
+	private static void bubbleSort(int arr[], boolean headBig) {
+
+		if (arr != null && arr.length > 0) {
+			int temp;
+			if (headBig) {
+				for (int i = arr.length - 1; i > 0; --i) {
+					for (int j = 0; j < i; ++j) {
+						if (arr[j] < arr[j + 1]) {
+							temp = arr[j];
+							arr[j] = arr[j + 1];
+							arr[j + 1] = temp;
+						}
+					}
+				}
+			} else {
+				for (int i = arr.length - 1; i > 0; --i) {
+					for (int j = 0; j < i; ++j) {
+						if (arr[j] > arr[j + 1]) {
+							temp = arr[j];
+							arr[j] = arr[j + 1];
+							arr[j + 1] = temp;
+						}
+					}
+				}
+
+			}
+		}
+
 	}
 
 }
