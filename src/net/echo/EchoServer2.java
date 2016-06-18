@@ -11,7 +11,7 @@ import java.net.Socket;
  */
 public class EchoServer2 implements Runnable {
 
-	public static final int PORT = 7157;
+	public static final int PORT = 7160;
 	private Socket client;
 
 	public EchoServer2(Socket client) {
