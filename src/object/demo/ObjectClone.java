@@ -54,7 +54,7 @@ public class ObjectClone implements Cloneable {
 			e.printStackTrace();
 		}
 		
-		short value = 3;
-		short value16 = 0xff;//
+//		short value = 3;
+//		short value16 = 0xff;//
 	}
 }
