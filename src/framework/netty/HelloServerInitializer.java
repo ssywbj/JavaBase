@@ -8,10 +8,8 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-/**
- * Created by wbj on 2016/8/26.
- */
 public class HelloServerInitializer extends ChannelInitializer<SocketChannel> {
+	
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
@@ -20,4 +18,5 @@ public class HelloServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("encoder", new StringEncoder());// 字符串编码
         pipeline.addLast("handler", new HelloServerHandler());// 自己的逻辑Handler
     }
+    
 }

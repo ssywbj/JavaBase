@@ -5,9 +5,6 @@ import java.net.InetAddress;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-/**
- * Created by wbj on 2016/8/26.
- */
 public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override

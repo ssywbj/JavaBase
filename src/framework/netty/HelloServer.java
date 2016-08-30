@@ -7,9 +7,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class HelloServer {
-    /**
-     * 服务端监听的端口地址
-     */
     private static final int portNumber = 7978;
 
     public static void main(String args[]) {
