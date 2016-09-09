@@ -1,9 +1,9 @@
-package framework.netty;
+package framework.rxjava;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class HelloClientHandler extends SimpleChannelInboundHandler<String> {
+public class RxClientHandler extends SimpleChannelInboundHandler<String> {
 
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, String msg)

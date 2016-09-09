@@ -1,4 +1,4 @@
-package framework.netty;
+package framework.rxjava;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,9 +12,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 /**
  * Created by wbj on 2016/8/26.
  */
-public class HelloClient {
+public class RxClient {
     public static String host = "127.0.0.1";
-    public static int port = HelloServer.PORT_NUMBER;
+    public static int port = 7978;
 
     public static void main(String arg[]){
         EventLoopGroup group = new NioEventLoopGroup();
@@ -33,7 +33,7 @@ public class HelloClient {
 		try {
 			Bootstrap b = new Bootstrap();
 			b.group(group).channel(NioSocketChannel.class)
-					.handler(new HelloClientInitializer());
+					.handler(new RxClientInitializer());
 
 			// 连接服务端
 			Channel ch = b.connect(host, port).sync().channel();
@@ -55,7 +55,6 @@ public class HelloClient {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("connect fail-->"+e.toString());
 		} finally {
 			// The connection is closed automatically on shutdown.
 			group.shutdownGracefully();

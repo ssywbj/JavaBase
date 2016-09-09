@@ -7,21 +7,28 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 
-    @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
-        System.out.println(channelHandlerContext.channel().remoteAddress() + " Say : " + s);// 收到客户端的消息
-        channelHandlerContext.writeAndFlush("Received your message !\n"); // 向客户端返回消息
-    }
+	@Override
+	protected void channelRead0(ChannelHandlerContext channelHandlerContext,
+			String s) throws Exception {
+		System.out.println("客户端："
+				+ channelHandlerContext.channel().remoteAddress() + " -->" + s);// 收到客户端的消息
+		channelHandlerContext.writeAndFlush(s + "(ECHO)" + "\n"); // 向客户端返回消息
+	}
 
-    /**
-     * 覆盖 channelActive 方法 在channel被启用的时候触发 (在建立连接的时候)
-     * channelActive 和 channelInActive 在后面的内容中讲述，这里先不做详细的描述
-     */
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-    	System.out.println("RemoteAddress : " + ctx.channel().remoteAddress() + " active !");
-        ctx.writeAndFlush("Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
-        super.channelActive(ctx);
-    }
+	/**
+	 * 建立连接时调用该方法
+	 */
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		super.channelActive(ctx);
+		System.out.println("连接-->" + ctx.channel().remoteAddress());
+		ctx.writeAndFlush("Welcome To "+ InetAddress.getLocalHost().getHostName() + "\n");
+	}
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		super.channelInactive(ctx);
+		System.out.println("断开-->" + ctx.channel().remoteAddress());
+	}
 
 }
