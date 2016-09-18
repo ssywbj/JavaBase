@@ -1,6 +1,7 @@
 package framework.netty;
 
 import java.net.InetAddress;
+import java.util.Date;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -12,7 +13,7 @@ public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 			String s) throws Exception {
 		System.out.println("客户端："
 				+ channelHandlerContext.channel().remoteAddress() + " -->" + s);// 收到客户端的消息
-		channelHandlerContext.writeAndFlush(s + "(ECHO)" + "\n"); // 向客户端返回消息
+		channelHandlerContext.writeAndFlush(s + "\n"); // 向客户端返回消息
 	}
 
 	/**
@@ -22,7 +23,12 @@ public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		super.channelActive(ctx);
 		System.out.println("连接-->" + ctx.channel().remoteAddress());
-		ctx.writeAndFlush("Welcome To "+ InetAddress.getLocalHost().getHostName() + "\n");
+		// ctx.writeAndFlush("Welcome To "+
+		// InetAddress.getLocalHost().getHostName() + "\n");
+		long timeConnect = new Date().getTime();
+		String connectInfo = "{\"code\":200,\"msg\":\"ok\",\"data\":\"connect socket server successfull\",\"sendTime\""
+				+ ":" + timeConnect + "," + "\"order\":\"DataConnect\"}";
+		ctx.writeAndFlush(connectInfo + "\n");
 	}
 
 	@Override
